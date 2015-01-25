@@ -1,5 +1,4 @@
-// IT IS A CELLO
-// WITH A HOLONOMIC DRIVETRAIN
+// Cello with a holonomic drivetrain
 // YOLO
 
 
@@ -11,16 +10,30 @@ using namespace std;
 namespace dreadbot {
   class CelloBot : IterativeRobot {
   private:
-    DriverStation ds;
-    DriveBase drivebase;
+    DriverStation* ds;
+    RobotDrive* drivebase;
+    PowerDistributionPanel *pdp;
+    Joystick* gamepad;
     
   public:
-    CelloBot() {
+    void RobotInit() {
+      SmartDashboard::init();
+      ds = DriverStation::GetInstance();
+      gamepad = new Joystick(0);
+      pdp = new PowerDistributionPanel();
+      drivebase = new RobotDrive(1, 2, 3, 4);
+    }
+    
+    void AutonomousInit() { }
+    void AutonomousPeriodic() { }
+    
+    void TeleopInit() {
       
     }
-    void RobotInit() {
+    void TeleopPeriodic() {
+      drivebase->MecanumDrive_Polar(gamepad->GetRawAxis(0), gamepad->GetRawAxis(1), gamepad->GetRawAxis(2));
     }
-    void AutonomousInit() {}
   }
 }
+
 START_ROBOT_CLASS(dreadbot::CelloBot);
