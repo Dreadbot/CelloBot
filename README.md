@@ -1,4 +1,3 @@
 CelloBot
-========
-
-2014 Offseason automated cello project
+--------
+C++ code for the holonomic Cellobot.
